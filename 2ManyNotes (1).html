@@ -1,0 +1,660 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>2ManyNotes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="icon" href="data:image/x-icon;base64,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" />
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.3.5/Tone.js" integrity="sha512-F1myjNkIKU5XJtOs1HXRo/zOjiUsABgFEEGKLx/riwK82jRThZFebEnfF2HWo9eeC+iC1Nwwnn9Vj6OGq+r7rQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.3.5/Tone.min.js" integrity="sha512-YDQMZjcsJD/jOfoz62wl1I/01xPYfqs8qAWuUyTDJXoSQI8+IhT3LPzTv/70SRybHgXfsp/+tzK0jGxDTOvpsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+-->
+
+<!--
+     ________  _________    ___    ___ ___       _______   ________          
+    |\   ____\|\___   ___\ |\  \  /  /|\  \     |\  ___ \ |\   ____\         
+    \ \  \___|\|___ \  \_| \ \  \/  / | \  \    \ \   __/|\ \  \___|_        
+     \ \_____  \   \ \  \   \ \    / / \ \  \    \ \  \_|/_\ \_____  \       
+      \|____|\  \   \ \  \   \/  /  /   \ \  \____\ \  \_|\ \|____|\  \      
+        ____\_\  \   \ \__\__/  / /      \ \_______\ \_______\____\_\  \     
+       |\_________\   \|__|\___/ /        \|_______|\|_______|\_________\    
+       \|_________|       \|___|/                            \|_________|    
+                                                                             
+--->
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+        }
+
+        p {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .infoDiv {
+            font-size: 50px;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .trip-container {
+            position: relative;
+            display: inline-block;
+        }
+        .trip-base {
+            position: relative;
+            font-size: 50px;
+        }
+        .trip-bar {
+            position: absolute;
+            top: -26px;
+            left: 13px;
+            font-size: 41px;
+        }
+        .trip-3 {
+            position: absolute;
+            top:   3px;
+            left: 30px;
+            font-size: 15px;
+        }
+        .userAns {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: silver;
+            min-height: 70px;
+            width: 100%;
+        }
+        .ansBtn {
+            border-style: solid;
+            font-size: 50px;
+            font-family: "Times New Roman", Times, serif;
+            height: 70px;
+            width: 110px;
+            text-align: center;
+            background-color: white;
+        }
+        .ansBtn:hover {
+            background-color: red;
+        }
+        .rhyPad {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: silver;
+            min-height: 70px;
+            width: 100%;
+        }
+        .rhyBtn {
+            border-style: solid;
+            font-size: 50px;
+            font-family: "Times New Roman", Times, serif;
+            height: 70px;
+            width: 110px;
+            text-align: center;
+            background-color: white;
+        }
+        .rhyBtn:hover {
+            background-color: green;
+        }
+        .checkMark
+        {
+            background-color: #3BE617;
+            border-style: solid;
+            border-color: green;
+            color: green;
+            border-radius: 35px;
+            height: 70px;
+            min-width: 70px;
+            text-align: center;
+            font-size: 50px;
+        }
+        .tooMany
+        {
+            background-color: red;
+            border-style: solid;
+            border-color: white;
+            color: white;
+            border-radius: 35px;
+            height: 70px;
+            padding-top: 6px;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        
+    </style>
+
+    </head>
+    <body>
+
+<!--
+     ___  ___  _________  _____ ______   ___              
+    |\  \|\  \|\___   ___\\   _ \  _   \|\  \             
+    \ \  \\\  \|___ \  \_\ \  \\\__\ \  \ \  \            
+     \ \   __  \   \ \  \ \ \  \\|__| \  \ \  \           
+      \ \  \ \  \   \ \  \ \ \  \    \ \  \ \  \____      
+       \ \__\ \__\   \ \__\ \ \__\    \ \__\ \_______\    
+        \|__|\|__|    \|__|  \|__|     \|__|\|_______|    
+-->
+    <table><tr>
+        <td rowspan=2>
+            <button id="btn1">Play New</button>
+            <button id="btn2">Re-Play</button>
+            <button id="btn3">Show</button>
+        </td><td>
+            <div id="bpmTxt">Beats/Min.</div>
+        </td><td>
+            <div id="bpbTxt">Beats/Bar</div>
+        </td><td>
+            <div id="barTxt">1 Bar</div>
+        </td><td rowspan=2>
+            <input type="checkbox" checked id="varyPitch" name="varyPitch" />
+            Vary Pitch
+        </td>
+    </tr><tr>
+        </td><td>
+            <input type="range" id="bpmSlider" min="20" max="200" value="60">
+        </td><td>
+            <input type="range" id="bpbSlider" min="1" max="5" value="4">
+        </td><td>
+            <input type="range" id="barSlider" min="1" max="5" value="1">
+        </td>
+    </tr></table>
+    <div id="infoDiv" class="infoDiv"></div>
+    <b>Your Answer:</b>
+    <div id="userAns" class="userAns"></div>
+    <b>Rhythms:</b> (click to add to your answer)
+    <div id="rhyPad" class="rhyPad"></div>
+
+<!--
+     ________  ________  ________  ___  ________  _________       
+    |\   ____\|\   ____\|\   __  \|\  \|\   __  \|\___   ___\     
+    \ \  \___|\ \  \___|\ \  \|\  \ \  \ \  \|\  \|___ \  \_|     
+     \ \_____  \ \  \    \ \   _  _\ \  \ \   ____\   \ \  \      
+      \|____|\  \ \  \____\ \  \\  \\ \  \ \  \___|    \ \  \     
+        ____\_\  \ \_______\ \__\\ _\\ \__\ \__\        \ \__\    
+       |\_________\|_______|\|__|\|__|\|__|\|__|         \|__|    
+       \|_________|                                               
+-->
+<script type="text/javascript">
+
+        beatsPerMinute = 60;
+        beatsPerBar = 4;
+        totalBars = 1;
+        currSecs  = 0;
+        currInfo  = "";
+        realAnswer = Array();
+        userAnswer = Array();
+
+        // next answer ID #
+        nextAnsId = 1;
+
+        part = new Tone.Part( ((time, value) => {
+            piano.triggerAttackRelease(value.pitch, value.length, time);
+        }) );
+
+        // locate the various GUI elements so we can interact with them later
+        const btn1      = document.getElementById("btn1");
+        const btn2      = document.getElementById("btn2");
+        const btn3      = document.getElementById("btn3");
+        const varyPitch = document.getElementById("varyPitch");
+        const bpmTxt    = document.getElementById("bpmTxt");
+        const bpbTxt    = document.getElementById("bpbTxt");
+        const barTxt    = document.getElementById("barTxt");
+        const infoDiv   = document.getElementById("infoDiv");
+        const userAns   = document.getElementById("userAns");
+        const rhyPad    = document.getElementById("rhyPad");
+        const bpmSlider = document.getElementById("bpmSlider");
+        const bpbSlider = document.getElementById("bpbSlider");
+        const barSlider = document.getElementById("barSlider");
+
+        const piano = new Tone.Sampler({
+                                urls: {
+                                        "A0" :  "A0.mp3",
+					"C1" :  "C1.mp3",
+                                        "D#1": "Ds1.mp3",
+                                        "F#1": "Fs1.mp3",
+                                        "A1" :  "A1.mp3",
+                                        "C2" :  "C2.mp3",
+                                        "D#2": "Ds2.mp3",
+                                        "F#2": "Fs2.mp3",
+                                        "A2" :  "A2.mp3",
+                                        "C3" :  "C3.mp3",
+                                        "D#3": "Ds3.mp3",
+                                        "F#3": "Fs3.mp3",
+                                        "A3" :  "A3.mp3",
+                                        "C4" :  "C4.mp3",
+                                        "D#4": "Ds4.mp3",
+                                        "F#4": "Fs4.mp3",
+                                        "A4" :  "A4.mp3",
+                                        "C5" :  "C5.mp3",
+                                        "D#5": "Ds5.mp3",
+                                        "F#5": "Fs5.mp3",
+                                        "A5" :  "A5.mp3",
+                                        "C6" :  "C6.mp3",
+                                        "D#6": "Ds6.mp3",
+                                        "F#6": "Fs6.mp3",
+                                        "A6" :  "A6.mp3",
+                                        "C7" :  "C7.mp3",
+                                        "D#7": "Ds7.mp3",
+                                        "F#7": "Fs7.mp3",
+                                        "A7" :  "A7.mp3",
+                                        "C8" :  "C8.mp3",
+				},
+				release: 1,
+				baseUrl: "https://tonejs.github.io/audio/salamander/",
+			}).toDestination();
+             piano.release = 0.3;
+
+//-----------------------------------------------------------------------------
+
+// return a random integer in the range lo to hi (inclusive) 
+function RandInt( lo, hi )
+{
+    return lo + Math.floor(Math.random()*(1+hi-lo));
+}
+
+//-----------------------------------------------------------------------------
+
+// return a random selection from the supplied list
+function RandPick( list )
+{
+    idx = Math.floor(Math.random()*list.length);
+    return list[idx];
+}
+
+//-----------------------------------------------------------------------------
+
+// calculate the total beats for a list of duration values
+function CalcBeats( durations )
+{
+    secs = 0;
+    secsPerBeat = Tone.Time('4n').toSeconds();
+    for ( i=0; i<durations.length; i++ )
+    {
+        secs += Tone.Time(durations[i]).toSeconds();
+    }
+    return Math.round(secs / secsPerBeat);
+}
+
+const myNotes = ["C3","D3","E3","F3","G3","A4","B4",
+                 "C4","D4","E4","F4","G4","A5","B5","C5"];
+
+const myIntervals = [-5, -3, -1, 0, 1, 3, 5];
+
+const intervalMatrix = [
+    [-4, -3, -2, 0, 1, 2, 3, 4],
+    [-4, -3, -1, 0, 1, 3],
+    [-5, -2, -1, 0, 2, 5],
+    [-5, -3, -2, -1, 0, 1, 3],
+    [-4, -3, -2, -1, 0, 3],
+    [-5, -4, -3, -1, 0, 2],
+    [-4, -1, 0, 1] ];
+
+const transitionMatrix = [
+    [40, 10, 13,  3, 13, 16,  5],
+    [11, 47, 11,  3,  7, 12, 11],
+    [ 7, 14, 47,  1,  8, 12, 11],
+    [ 9, 10, 14, 37, 13, 10,  7],
+    [ 5,  7, 12,  1, 11, 15, 49],
+    [ 9,  8,  7,  3, 45, 16, 13],
+    [ 5, 10, 12,, 1, 15, 48,  8]];
+
+
+// const myNotes = ["C4", "E4", "G4", "A5", "C5"];
+function RandNote() { return RandPick(myNotes); }
+
+// A class to hold rhythm info - members are
+//  name - a short code to identify the rhythm
+//  html - some HTML to present the rhythm
+//  durations - list of note duration strings (e.g.["8n", "8n"])
+//  beats - total rhythm duration in beats (e.g. 1 or 2)
+class Rhythm {
+    constructor( name, html, durations ) {
+        this.name = name;
+        this.html = html;
+        this.durations = durations;
+        this.beats = CalcBeats(durations);
+    }
+}
+
+//-----------------------------------------------------------------------------
+
+
+// Images for notes:
+
+const dEdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAyCAYAAADSprJaAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAACEUlEQVRYw+3YzUtVQRgG8N+RW2QGWpuQigpuH0QUJS2UoIiSCoR2tahok+4SCvwnatGqaNFCgqho0SaFMBLENkK0cqMEfULkoogoKjotGkFOV72cc68Dch84nJlhZs5z3veZd94ZGmiggQYaaGCZYxApRrGmlhM35RizBa2xSWzGeSQx3TH7XIlBJEsixTWsiE0ixR20xCaRYriIWJtqRPA4ruZ1TR4SY9iDG/gzp/0iLsUIVhsxMsctH1Beane8Qw9uh3o7zsbQxPcQM56G+mmsjyHML+jHDHZifwwSMIn7obwvFokUT0J5RywS8BpfsSEbRdNUebDT+D+yXanusVv1yifaA5H/+gz1Voi0/S/HoSRNy5Jkup4BJk2d6Ku0306MdtXDHbN4j2/Va6K2VmjGyhA70tnGJDF8qrdC7wOHn9dDEx3BApcruGTJhNkTNrWjMZfoNnzEq1gkkuCOF2E3rRqledpX4SC60YZpbF1krjZsx0P8KKruAfxcIJWbTxMdeBPe8lqiFfdCqpYHnWETm8xrgRJuLvD3i1miGUM4UyTH3BtOVXmxC2vxrAiJQ1hd5ZiZjPASnMOjsDwLWaJaTOB35oC8G3eLnjt+Vdn/Mx5nrHAhLMu3RQNNX5WivJ45BJdwslZXBZswtQiBkVrfS1TCEXyah8ADrKvXh7P5TksgcyyE7umg+qm5+cGyxF8FCq5Ni9xw1gAAAABJRU5ErkJggg==";
+
+const dQdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAyCAYAAABGQBuoAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAABFklEQVRYw+3Xr0sEQRjG8c+qQRAuCSKc7QS7GrxkUdAgmu1n06b/h80o/g16VTjuisUkBsuB1WoQdQwO/rpTdmUXROaBCcv77vudnWfmHZakpKSkpDdNo4+AgyIvjlQ9swRIgARIgATIqxA0jpd0X9t5M1jtHJV6H5y1hBh7H3uXXRgrYfZrO9mQwMV5UwiNv+9BlmlvtoYEFpd7suymFA8qN/l/H7TvtukUVtCMOX3UygDUcYitKr5gAW1MVuFBHSdlF/8I2MZcVbtoIhqaV7dFATXM5sy/x3VRwDMec+Z3cFV0mcZxOtDPB8dTwaX8pI1Y4CfAPrLfAkZjgWGFH7Abc4q38y/PM1jHfPSlFw/f3Z/9uXsBcsZUp5URIn4AAAAASUVORK5CYII=";
+
+const Edata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAyCAYAAAC3S0AlAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAABxUlEQVRYw+3WzatNURjH8c8+HXIduZeJvIW6XpKIO1JKKZIyZoBMdGcMlH+CgREjAykhAxOUrihDZWBwJ07Ka+EWkgjdbfLcOu32vmd3Wruk86vdXmvvvb7r2c/zrLUehhpqqKH+Y11FjsdYUmdAa4BJ1mO0Kfg6nEDWhFvmrrMpJyjCc1zAgqbgOa6h0xQ8x/2yILcSuewgzhddNAj8CbbjEmZ7np/C6ZSLaA2metzzHuOp3PIWh3El+itxLKXPf0TOP4z+EaxIGdCvOIMZbMGulHCYxs1o70wNz/Eg2ptTw+EVvmE1OqnhH/EZbWQteT7e1OnSaoj7Dt9bsqybEDqChZH7eWrLl2FppGVyt6wK6583Ad+ID3iZGp5hAs9id9Su+HAR9uAAxtDFhj7wMWzCbfysivY5/JrnSKsqiibwOu6Klo/iRhxZg2h3ZMl08UUbl+extp/lI7iHo2UrdEdUUYNqa+T4ozL4XiyuCZopBCzDcdyJNCy1vK6e4k+hMN2G61Ub1++a4C+4W7D6ZKTfm6pBkzWDebFQfLZxqF9JvRYv+oCn6tblZdqHTxXgW1g+yH7Qq05Msj+2gG5kwdxf/Tv6C8vGhpn6gpRyAAAAAElFTkSuQmCC";
+
+const Hdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAyCAYAAABs8OoHAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAABCElEQVRIx+3VvyuFURzH8dflikHyq0QpFmVTGPwBDG4sNwYWf4HF4E8xWRSTXQaLwUBGmQzKajAo3dwey3nqOB2LTDqfeuqc73Pe3+/nfJ/TeSgqKgKTeEaFQ+j5baYCFrCABfzfYDMT68US2hjGB+7TtSk4gzOsRLEuGqm7eLKA6wh6whr6MYjjnOUx3IYrvsIlRpM183itfwG11S0sh/EVtvGWST4UWx3ARpg/YCcDNbGX9mQi7KeL1R+63w7vK+zWwfFQ6Q4jGaiF9wC9YDa2cY7HUL1WI+y9EzXtIM26GaycYgpzOImACkfoS8FGyFZlng72w4n6BsSaxjoW8YkbXITv9zf6AjKgNVxU+QybAAAAAElFTkSuQmCC";
+
+
+const Qdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAyCAYAAACDMoE5AAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAAAv0lEQVRIx+3WP2pCQRCA8V9MioBgFQiCKQX7pLK3sQik9g6WyT1yhZxBPIDgEUJawdbWQtSkGcJDXl6ef8r5YJud+WaZYWGXJEnOoo0FvvEGjXOqpZxyyimnfAo3FbF7DNCPvAVa/8kdvOPl2JOfMMXdsT138FFXPJRH6J0y7WYMpy7LotxCt6a4xldR3mNbU57hs7hxi0m8vVVr91d7zxGskl9xVSZfR7BM2mAcOb+UVXnAEI8xh3lcnNVFPyk/Rgor7P6Xu+IAAAAASUVORK5CYII=";
+
+const Sdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAyCAYAAABGQBuoAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAACCElEQVRYw+3Xz4tNYRgH8M81c9VIfqyYMqGMQoxolMVkQ5FmY6cpfwGlJmzsJFlYmA3CQpFsLNhSLEgoFiIzUQizUMyCaVxcm+fqOO65986955bFfep0z32fc57v877f5/m+76FjHetYxzr2lx1BGW/Q2+hLc5oAWooV7QSYi/NY1S4AWIfnOIyevDlIX1MYQTHPGSRtAS7jIVa3A6BiG/EEu1sF+I5bKFXxzYvZbGmFgxkMoQvrcb0KLzebIT9J8niqTNcGBxX/V2xutYreYjDh78GFhH+4VZL7cA/7UMA0RnE7/P15VFERl3AoOJnCWPgm8izTk5F9Ae/xOWbUdJm+qjJ+AnvifhKvmwWYxDYM4FGqp85iRyTwIY/9oIijVfpgJC+pKOE4DuBXjE1Hn+SmRWWcw8VEP2zKW+xKOI1P8X+wHWr6EncT3OQO8CNVVbkDiG1UUsrzBqgszZ+ZdNd4cCAUsRcfGzxF9OMbHmc90IW9IVrljCvr4FXAFTzAwqysz9QIXA9gCV5gf1b2ow0ErwWwMzRoZdbmMdECQDeu4lgs1T+2q8Hg5aiQxan3t8aRpS+rDzbMohSf4UuKu4M4hXdZAKVZCNu1+E3OfibGM217yG295al23hnGsnqZzcedOsHHsbyVNl8TdVwt+P3ZfHSkuy/dbENR04tCIm7gKX7+lx92vwGCSLhx/xNZOgAAAABJRU5ErkJggg==";
+
+const Tdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAAyCAYAAAAX1CjLAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAACgElEQVRo3u2ZTWgTQRiGn8SkPwaqaECFiFQsWC2UUi+KUBT8QVREjxqvHgpeUurdUwo9eOzFQ5GAeLAKLkK1UhA8KJ7EGFCQgj8HK9qDEpvE8ZCxbNdt9tt0sGadF/aQzcy7+8z37TfDDKyR1BS5XlD8vvKqQKtrCUrD1H/3KqZUrqXBSiMUyTrKfc/JohgpFYmanCzKC9v6qZmnQBRS0beARC1ay1Kxb1yhVHe00tFwZYzbQmG8WLjmMUX3eF9EYJfgol48rExrepoLKXfq/NvX2lTFv6GEtOHMDC9+wDyQjhMvtNN+dzUPrlDZWYtVrypFW4LEWJLk89X4lSkPK9RQjFhREa4ObQPmdKivGBjUQeCb9jtlwG9Se81GOhUtmAWzYBbMglkwC2bBLJgFs2AWzIJZMAv2X4M12qXaAhwBDuh2c0BXk8+JATuAY9Q3carAAtDWpF8HcBA4CmwEPgKBx08Z4DaNNyTD7FLtAZ4G+El3qTqBUWCxgdesX8T2AfeBtKGMOAvcBJIGvDZor+Nhv7EMcMMg1ABw3RBUAshLobxg54HdBr/dYZ3/JtQPXGymKqZ0oZDqXcD/m4FDQq8q8CWgzRCwXug37wbrAnqEHb8DJUEB2ir0ew+8FURMqmdusJ965CR6DBQFUagJ/e4BHwLaVIReXwHHOy84BJ871YQpmwZeCvw+AXsFfpeQnYtd03PmMp3WL96o46hfxxWUEwzSOaFXBngV4PdQTwl/aJ1+cb9Oi8Bl3UaqTmBiBb8F4GSIQQLYryPs53cL2ORd6ni1HTjhWvo80ZP25yaXUj3AGWAXUAYeAI+on42FVQo4rD+HDuANcAd4rQGjr18R6SaupsbPEQAAAABJRU5ErkJggg==";
+
+
+const xH   = '<img src="' +  Hdata + '" />';
+const xQ   = '<img src="' +  Qdata + '" />';
+const xdQ  = '<img src="' + dQdata + '" />';
+const xE   = '<img src="' +  Edata + '" />';
+const xdE  = '<img src="' + dEdata + '" />';
+const xS   = '<img src="' +  Sdata + '" />';
+const xTTT = '<img src="' +  Tdata + '" />';
+
+const xdES  = xdE + xS;
+const xEE   = xE  + xE;
+const xSdE  = xS  + xdE;
+const xESS  = xE  + xS  + xS;
+const xSES  = xS  + xE  + xS;
+const xSSE  = xS  + xS  + xE;
+const xSSSS = xS  + xS  + xS  + xS;
+const xdQE  = xdQ + xE;
+const xEdQ  = xE  + xdQ;
+const xEQE  = xE  + xQ  + xE;
+
+
+
+//-----------------------------------------------------------------------------
+
+// Setup our collection of rhythms
+rhythms = new Array();
+rhythms.push( new Rhythm("Q",   xQ,    ["4n"                   ] ) );
+rhythms.push( new Rhythm("dES", xdES,  ["8n.", "16n"           ] ) );
+rhythms.push( new Rhythm("EE",  xEE,   ["8n","8n"              ] ) );
+rhythms.push( new Rhythm("SdE", xSdE,  ["16n", "8n."           ] ) );
+rhythms.push( new Rhythm("TTT", xTTT,  ["8t", "8t", "8t"       ] ) );
+rhythms.push( new Rhythm("ESS", xESS,  ["8n", "16n", "16n"     ] ) );
+rhythms.push( new Rhythm("SES", xSES,  ["16n", "8n", "16n"     ] ) );
+rhythms.push( new Rhythm("SSE", xSSE,  ["16n", "16n", "8n"     ] ) );
+rhythms.push( new Rhythm("SSSS",xSSSS, ["16n","16n","16n","16n"] ) );
+rhythms.push( new Rhythm("H",   xH,    ["2n"                   ] ) );
+rhythms.push( new Rhythm("dQE", xdQE,  ["4n.", "8t"            ] ) );
+rhythms.push( new Rhythm("EdQ", xEdQ,  ["8n", "4n."            ] ) );
+rhythms.push( new Rhythm("EQE", xEQE,  ["8n", "4n", "8n"       ] ) );
+
+function RandRhythm() { return RandPick(rhythms); }
+
+//-----------------------------------------------------------------------------
+
+function FindRhythm( name )
+{
+    r = rhythms[0];
+    for( i=0; r.name!=name && i<rhythms.length; i++ )
+    {
+        r = rhythms[i];
+    }
+    return r;
+}
+
+//-----------------------------------------------------------------------------
+
+// Set Beats Per Minute
+function SetBPM( bpm )
+{
+    beatsPerMinute = bpm;
+    bpmTxt.innerHTML = bpm + " Beats/Min.";
+    Tone.getTransport().bpm.value = bpm;
+}
+
+//-----------------------------------------------------------------------------
+
+// Set Beats Per Bar
+function SetBPB( bpb )
+{
+    beatsPerBar = bpb;
+    bpbTxt.innerHTML = bpb + " Beats/Bar";
+    Tone.getTransport().timeSigniature = bpb;
+}
+
+//-----------------------------------------------------------------------------
+
+// Set Bars
+function SetBars( n )
+{
+    totalBars = n;
+    barTxt.innerHTML = n + " Bar" + (n==1 ? "" : "s");
+}
+
+//-----------------------------------------------------------------------------
+
+// Add specified not to part
+function AddNote( time, pitch, length )
+{
+    console.log( "AddNote: time="+time+", pitch="+pitch+", length="+length );
+    const noteObj = new Object( { time: time, pitch: pitch, length: length } );
+    part.add( noteObj );
+}
+
+//-----------------------------------------------------------------------------
+
+function Compose()
+{
+    var detail1 = "";
+    var detail2 = "";
+    currInfo = "";
+    totalSecs = 0;
+    realAnswer = Array();
+    userAnswer = Array();
+    userAns.innerHTML = "";
+
+    // remove any/all old notes from part
+    part.clear();
+
+    // Do initial count off
+    spb = Tone.Time("4n").toSeconds();
+    for( var i=0; i<beatsPerBar; i++ )
+    {
+        // console.log( " totalSecs="+totalSecs );
+        AddNote( totalSecs, "C7", "4n" );
+        totalSecs += spb;
+    }
+    introSecs = totalSecs;
+
+    // pick a random nummber of bars to play
+    // totalBars = RandInt(1, 2);
+
+    var pitchIdx = 7;
+    firstNote = true;
+    for ( barIdx=0; barIdx<totalBars; barIdx++ )
+    {
+        beatsLeft=beatsPerBar;
+        while( beatsLeft>0 )
+        {
+            console.log( " totalSecs="+totalSecs );
+
+            // Pick a random rhythm
+            rhythm = RandRhythm();
+
+            // check the selected rhythm fits within the remainder of the bar
+            while( rhythm.beats > beatsLeft )
+            {
+                // we picked a rhythm that's too long - try again...
+                rhythm = RandRhythm();
+            }
+
+            realAnswer.push(rhythm.name);
+            beatsLeft -= rhythm.beats;
+            for ( i=0; i<rhythm.durations.length; i++ )
+            {
+                length = rhythm.durations[i];
+                lastNote = (beatsLeft== 0) && ((rhythm.durations.length-i)==1);
+
+                // want to start and end on Do, other notes can be random
+                // (if vary pitch is checked)
+                if( firstNote || lastNote || !varyPitch.checked )
+                {
+                    pitchIdx = 7;
+                }
+                else
+                {
+                    var prevIdx = pitchIdx;
+                    var ni = pitchIdx % 7;
+/*
+                    var ivals = intervalMatrix[ni];
+                    do {
+                        pitchIdx = prevIdx + RandPick( ivals );
+                    }
+                    while ( pitchIdx<0 || pitchIdx >= myNotes.length );
+*/
+                    var row = transitionMatrix[ni];
+                    var rnd = RandInt(0, 99);
+                    var newIdx = 0;
+                    var cumProb = row[0];
+                    while( cumProb < rnd && newIdx < 6 )
+                    {
+                        newIdx++;
+                        cumProb += row[newIdx];
+                    }
+                    if( prevIdx > newIdx+3.5 ) { newIdx += 7; }
+                    pitchIdx = newIdx;
+                }
+                pitch = myNotes[pitchIdx];
+                AddNote( totalSecs, pitch, length );
+                detail1 += " " + length + "@" + pitch + "(idx="+pitchIdx+")";
+                totalSecs += Tone.Time(length).toSeconds();
+                firstNote = false;
+            }
+            detail2 += rhythm.name + " (" + rhythm.beats + ")  ";
+            currInfo += rhythm.html + " ";
+        }
+
+        detail1 += " | ";
+        detail2 += " | ";
+        currInfo += "&#x1D100; ";
+    }
+    currSecs = totalSecs;
+    console.log( " currSecs="+currSecs );
+
+    console.log( detail1 );
+    console.log( detail2 );
+    console.log( "" );
+}
+
+//-----------------------------------------------------------------------------
+
+// (re)Play the current set of notes
+function PlayNotes()
+{
+    Tone.start();
+    tt = Tone.getTransport();
+    tt.seconds = 0;
+    tt.start(0);
+    part.start(0);
+    // part.stop(tt.seconds + currSecs);
+}
+
+//-----------------------------------------------------------------------------
+
+function CheckAns()
+{
+    var ok = true;
+    // remove any too many message
+    const el = document.getElementById("tooMany");
+    if ( el ) { el.remove(); }
+    var i = 0;
+    var userNoteCount = 0;
+    for (const [id, name] of Object.entries(userAnswer)) {
+        if ( i>=realAnswer.length ||
+             name != realAnswer[i] ) { ok = false; }
+        i++;
+        r = FindRhythm( name );
+        userNoteCount += r.durations.length;
+    }
+
+    if ( ok && i>0 && i == realAnswer.length )
+    {
+        userAns.innerHTML += "<span id=checkMark class=checkMark>&check;</span>";
+    }
+    else
+    {
+        // remove any checkmark
+        const el = document.getElementById("checkMark");
+        if ( el ) { el.remove(); }
+
+        realNoteCount = 0;
+        for( i=0; i<realAnswer.length; i++ )
+        {
+            r = FindRhythm( realAnswer[i] );
+            realNoteCount += r.durations.length;
+        }
+
+        if ( realNoteCount < userNoteCount )
+        {
+            userAns.innerHTML += "<div id=tooMany class=tooMany>" +
+                 "There are simply too many notes.<br/>" +
+                 "Just cut a few and it'll be perfect.</div>";
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------
+
+function AddAns( ans )
+{
+    ansId = "ans" + nextAnsId++;
+
+    // find rhythm
+    r = FindRhythm( ans );
+    userAnswer[ansId] = ans;
+    h = `<div id='${ansId}' onClick="DelAns('${ansId}');" class="ansBtn">${r.html}</div>`;
+    userAns.innerHTML += h;
+
+    CheckAns();
+}
+
+//-----------------------------------------------------------------------------
+
+function DelAns( ansId )
+{
+    delete userAnswer[ansId]; // remove rhythm from answer 
+    const el = document.getElementById(ansId);  // and remove element
+    el.remove();
+    CheckAns();
+}
+
+//-----------------------------------------------------------------------------
+
+    // Setup button and slider event callbacks
+
+    // btn1=play - compose new set of notes, then play them
+    btn1.addEventListener("click", () => {
+        Compose();
+        infoDiv.innerHTML = "";
+        PlayNotes();
+    });
+
+    // btn2=replay - replay current set of notes
+    btn2.addEventListener("click", () => { PlayNotes(); });
+
+    // show notes on btn3 click
+    btn3.addEventListener("click", () => { infoDiv.innerHTML = currInfo; });
+
+    // respond to slider changes
+    bpmSlider.addEventListener("input", () => { SetBPM( bpmSlider.value); });
+    bpbSlider.addEventListener("input", () => { SetBPB( bpbSlider.value); });
+    barSlider.addEventListener("input", () => { SetBars(barSlider.value); });
+
+    // populate rhythm pad with rhythm answer buttons
+
+    for (i=0; i<rhythms.length; i++ )
+    {
+        r = rhythms[i];
+        h = `<div onClick="AddAns('${r.name}');" class="rhyBtn">${r.html}</div>`;
+        rhyPad.innerHTML += h;
+    }
+
+    // initialize BPM & BPB
+    SetBPM(60);
+    SetBPB(4);
+    SetBars(1);
+
+</script>
+
+</body>
+</html>
