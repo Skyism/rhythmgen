@@ -16,3 +16,10 @@ export class Rhythm {
 export interface UserAnswer {
   [key: string]: string;
 }
+
+export type MeterType = 'binary' | 'ternary';
+
+export interface TimeSignature {
+  numerator: number;
+  denominator: number;
+}

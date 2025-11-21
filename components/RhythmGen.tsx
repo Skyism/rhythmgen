@@ -2,20 +2,27 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as Tone from 'tone';
-import { UserAnswer } from '@/lib/types';
-import { myNotes, transitionMatrix } from '@/lib/data';
-import { randInt, randPick, randRhythm, findRhythm } from '@/lib/utils';
+import { UserAnswer, MeterType, TimeSignature } from '@/lib/types';
+import { myNotes, transitionMatrix, ternaryTimeSignatures } from '@/lib/data';
+import { randInt, randPick, randRhythm, findRhythm, randRhythmThatFits } from '@/lib/utils';
 import RhythmControls from './RhythmControls';
 import UserAnswerComponent from './UserAnswer';
 import RhythmPad from './RhythmPad';
 import RhythmNotation from './RhythmNotation';
 
-export default function RhythmGen() {
+interface RhythmGenProps {
+  meterType: MeterType;
+}
+
+export default function RhythmGen({ meterType }: RhythmGenProps) {
   // State management
   const [beatsPerMinute, setBeatsPerMinute] = useState(60);
   const [beatsPerBar, setBeatsPerBar] = useState(4);
   const [totalBars, setTotalBars] = useState(1);
   const [varyPitch, setVaryPitch] = useState(true);
+  const [timeSignature, setTimeSignature] = useState<TimeSignature>(
+    meterType === 'ternary' ? ternaryTimeSignatures[1] : { numerator: 4, denominator: 4 }
+  );
   const [realAnswer, setRealAnswer] = useState<string[]>([]);
   const [userAnswer, setUserAnswer] = useState<UserAnswer>({});
   const [currInfo, setCurrInfo] = useState<Array<{ type: 'rhythm' | 'barline'; html: string }>>([]);
@@ -86,6 +93,18 @@ export default function RhythmGen() {
     };
   }, []);
 
+  // Calculate beats per bar based on meter type and time signature
+  useEffect(() => {
+    if (meterType === 'ternary') {
+      // In ternary meters, beats = numerator / 3 (since each beat is 3 eighth notes)
+      const beats = timeSignature.numerator / 3;
+      setBeatsPerBar(beats);
+    } else {
+      // Binary meters: beats = numerator
+      setBeatsPerBar(timeSignature.numerator);
+    }
+  }, [meterType, timeSignature]);
+
   // Compose a new rhythm sequence
   const compose = useCallback(() => {
     const newCurrInfo: Array<{ type: 'rhythm' | 'barline'; html: string }> = [];
@@ -102,14 +121,15 @@ export default function RhythmGen() {
       partRef.current.clear();
     }
 
-    // Do initial count off
-    const spb = Tone.Time('4n').toSeconds();
+    // Do initial count off - use dotted quarter for ternary, quarter for binary
+    const countOffLength = meterType === 'ternary' ? '4n.' : '4n';
+    const spb = Tone.Time(countOffLength).toSeconds();
     for (let i = 0; i < beatsPerBar; i++) {
       if (partRef.current) {
         partRef.current.add({
           time: totalSecs,
           pitch: 'C7',
-          length: '4n',
+          length: countOffLength,
         });
       }
       totalSecs += spb;
@@ -122,16 +142,16 @@ export default function RhythmGen() {
       let beatsLeft = beatsPerBar;
 
       while (beatsLeft > 0) {
-        // Pick a random rhythm
-        let rhythm = randRhythm();
-
-        // Check the selected rhythm fits within the remainder of the bar
-        while (rhythm.beats > beatsLeft) {
-          rhythm = randRhythm();
-        }
+        // Pick a random rhythm that fits within the remainder of the bar
+        const rhythm = randRhythmThatFits(beatsLeft, meterType);
 
         newRealAnswer.push(rhythm.name);
         beatsLeft -= rhythm.beats;
+        
+        // Safety check: if beatsLeft becomes negative or very small, break to avoid infinite loops
+        if (beatsLeft < 0.1) {
+          beatsLeft = 0;
+        }
 
         for (let i = 0; i < rhythm.durations.length; i++) {
           const length = rhythm.durations[i];
@@ -177,7 +197,7 @@ export default function RhythmGen() {
 
     setRealAnswer(newRealAnswer);
     setCurrInfo(newCurrInfo);
-  }, [beatsPerBar, totalBars, varyPitch]);
+  }, [beatsPerBar, totalBars, varyPitch, meterType]);
 
   // Play the composed notes
   const playNotes = useCallback(async () => {
@@ -203,7 +223,7 @@ export default function RhythmGen() {
       if (i >= realAnswer.length || userAnswerArray[i] !== realAnswer[i]) {
         ok = false;
       }
-      const r = findRhythm(userAnswerArray[i]);
+      const r = findRhythm(userAnswerArray[i], meterType);
       userNoteCount += r.durations.length;
     }
 
@@ -212,7 +232,7 @@ export default function RhythmGen() {
     } else {
       let realNoteCount = 0;
       for (let i = 0; i < realAnswer.length; i++) {
-        const r = findRhythm(realAnswer[i]);
+        const r = findRhythm(realAnswer[i], meterType);
         realNoteCount += r.durations.length;
       }
 
@@ -220,7 +240,7 @@ export default function RhythmGen() {
         setTooManyNotes(true);
       }
     }
-  }, [userAnswer, realAnswer]);
+  }, [userAnswer, realAnswer, meterType]);
 
   // Add rhythm to user's answer
   const addAnswer = useCallback((rhythmName: string) => {
@@ -273,10 +293,12 @@ export default function RhythmGen() {
       <h1 className="text-4xl font-bold mb-6 text-center">2ManyNotes</h1>
 
       <RhythmControls
+        meterType={meterType}
         beatsPerMinute={beatsPerMinute}
         beatsPerBar={beatsPerBar}
         totalBars={totalBars}
         varyPitch={varyPitch}
+        timeSignature={timeSignature}
         onPlayNew={handlePlayNew}
         onReplay={playNotes}
         onShow={handleShow}
@@ -284,6 +306,7 @@ export default function RhythmGen() {
         onBpbChange={handleBpbChange}
         onBarsChange={setTotalBars}
         onVaryPitchChange={setVaryPitch}
+        onTimeSignatureChange={setTimeSignature}
       />
 
       {showInfo && currInfo.length > 0 && (
@@ -307,7 +330,7 @@ export default function RhythmGen() {
         onDeleteAnswer={deleteAnswer}
       />
 
-      <RhythmPad onAddAnswer={addAnswer} />
+      <RhythmPad meterType={meterType} onAddAnswer={addAnswer} />
     </div>
   );
 }

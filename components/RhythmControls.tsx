@@ -1,12 +1,16 @@
 'use client';
 
 import React from 'react';
+import { MeterType, TimeSignature } from '@/lib/types';
+import { ternaryTimeSignatures } from '@/lib/data';
 
 interface RhythmControlsProps {
+  meterType: MeterType;
   beatsPerMinute: number;
   beatsPerBar: number;
   totalBars: number;
   varyPitch: boolean;
+  timeSignature: TimeSignature;
   onPlayNew: () => void;
   onReplay: () => void;
   onShow: () => void;
@@ -14,13 +18,16 @@ interface RhythmControlsProps {
   onBpbChange: (value: number) => void;
   onBarsChange: (value: number) => void;
   onVaryPitchChange: (checked: boolean) => void;
+  onTimeSignatureChange: (ts: TimeSignature) => void;
 }
 
 export default function RhythmControls({
+  meterType,
   beatsPerMinute,
   beatsPerBar,
   totalBars,
   varyPitch,
+  timeSignature,
   onPlayNew,
   onReplay,
   onShow,
@@ -28,6 +35,7 @@ export default function RhythmControls({
   onBpbChange,
   onBarsChange,
   onVaryPitchChange,
+  onTimeSignatureChange,
 }: RhythmControlsProps) {
   return (
     <div className="mb-6">
@@ -59,11 +67,31 @@ export default function RhythmControls({
                 {beatsPerMinute} Beats/Min.
               </div>
             </td>
-            <td className="px-2">
-              <div id="bpbTxt" className="font-semibold">
-                {beatsPerBar} Beats/Bar
-              </div>
-            </td>
+            {meterType === 'ternary' ? (
+              <td className="px-2">
+                <div className="font-semibold mb-1">Time Signature</div>
+                <select
+                  value={`${timeSignature.numerator}/${timeSignature.denominator}`}
+                  onChange={(e) => {
+                    const [num, den] = e.target.value.split('/').map(Number);
+                    onTimeSignatureChange({ numerator: num, denominator: den });
+                  }}
+                  className="w-full px-2 py-1 border border-gray-300 rounded"
+                >
+                  {ternaryTimeSignatures.map((ts) => (
+                    <option key={`${ts.numerator}/${ts.denominator}`} value={`${ts.numerator}/${ts.denominator}`}>
+                      {ts.numerator}/{ts.denominator}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            ) : (
+              <td className="px-2">
+                <div id="bpbTxt" className="font-semibold">
+                  {beatsPerBar} Beats/Bar
+                </div>
+              </td>
+            )}
             <td className="px-2">
               <div id="barTxt" className="font-semibold">
                 {totalBars} Bar{totalBars === 1 ? '' : 's'}
@@ -92,16 +120,24 @@ export default function RhythmControls({
                 className="w-full"
               />
             </td>
-            <td className="px-2">
-              <input
-                type="range"
-                min="1"
-                max="5"
-                value={beatsPerBar}
-                onChange={(e) => onBpbChange(Number(e.target.value))}
-                className="w-full"
-              />
-            </td>
+            {meterType === 'ternary' ? (
+              <td className="px-2">
+                <div className="font-semibold">
+                  {beatsPerBar} Beats/Bar
+                </div>
+              </td>
+            ) : (
+              <td className="px-2">
+                <input
+                  type="range"
+                  min="1"
+                  max="5"
+                  value={beatsPerBar}
+                  onChange={(e) => onBpbChange(Number(e.target.value))}
+                  className="w-full"
+                />
+              </td>
+            )}
             <td className="px-2">
               <input
                 type="range"

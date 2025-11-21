@@ -1,4 +1,4 @@
-import { Rhythm } from './types';
+import { Rhythm, TimeSignature } from './types';
 
 // Image data for notes
 export const dEdata = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAyCAYAAADSprJaAAAABmJLR0QA8gDhABUOSuY+AAAACXBIWXMAAA7BAAAOwQG4kWvtAAACEUlEQVRYw+3YzUtVQRgG8N+RW2QGWpuQigpuH0QUJS2UoIiSCoR2tahok+4SCvwnatGqaNFCgqho0SaFMBLENkK0cqMEfULkoogoKjotGkFOV72cc68Dch84nJlhZs5z3veZd94ZGmiggQYaaGCZYxApRrGmlhM35RizBa2xSWzGeSQx3TH7XIlBJEsixTWsiE0ixR20xCaRYriIWJtqRPA4ruZ1TR4SY9iDG/gzp/0iLsUIVhsxMsctH1Beane8Qw9uh3o7zsbQxPcQM56G+mmsjyHML+jHDHZifwwSMIn7obwvFokUT0J5RywS8BpfsSEbRdNUebDT+D+yXanusVv1yifaA5H/+gz1Voi0/S/HoSRNy5Jkup4BJk2d6Ku0306MdtXDHbN4j2/Va6K2VmjGyhA70tnGJDF8qrdC7wOHn9dDEx3BApcruGTJhNkTNrWjMZfoNnzEq1gkkuCOF2E3rRqledpX4SC60YZpbF1krjZsx0P8KKruAfxcIJWbTxMdeBPe8lqiFfdCqpYHnWETm8xrgRJuLvD3i1miGUM4UyTH3BtOVXmxC2vxrAiJQ1hd5ZiZjPASnMOjsDwLWaJaTOB35oC8G3eLnjt+Vdn/Mx5nrHAhLMu3RQNNX5WivJ45BJdwslZXBZswtQiBkVrfS1TCEXyah8ADrKvXh7P5TksgcyyE7umg+qm5+cGyxF8FCq5Ni9xw1gAAAABJRU5ErkJggg==";
@@ -41,8 +41,8 @@ const xEQSS = xE + xQ + xS + xS;
 const xSSQE = xS + xS + xQ + xE;
 const xSSQSS = xS + xS + xQ + xS + xS;
 
-// Setup our collection of rhythms using images
-export const rhythms: Rhythm[] = [
+// Setup our collection of binary rhythms using images
+export const binaryRhythms: Rhythm[] = [
   // Quarter note: 4n = 1 beat
   new Rhythm("Q", xQ, ["4n"], 1),
 
@@ -97,6 +97,72 @@ export const rhythms: Rhythm[] = [
   // Two sixteenths + quarter + two sixteenths: 16n(0.25) + 16n(0.25) + 4n(1) + 16n(0.25) + 16n(0.25) = 2 beats
   new Rhythm("SSQSS", xSSQSS, ["16n", "16n", "4n", "16n", "16n"], 2),
 ];
+
+// Ternary meter rhythms (beat = dotted quarter = 3 eighth notes)
+// Additional compound rhythms for ternary
+const xEEE = xE + xE + xE; // 3 eighths
+const xQE = xQ + xE; // quarter + eighth
+const xEQ = xE + xQ; // eighth + quarter
+const xSSEE = xS + xS + xE + xE; // 2 sixteenths + 2 eighths
+const xEESS = xE + xE + xS + xS; // 2 eighths + 2 sixteenths
+const xSSSSE = xS + xS + xS + xS + xE; // 4 sixteenths + eighth
+const xSSESS = xS + xS + xE + xS + xS; // 2 sixteenths + eighth + 2 sixteenths
+const xESSSS = xE + xS + xS + xS + xS; // eighth + 4 sixteenths
+const xSSSSSS = xS + xS + xS + xS + xS + xS; // 6 sixteenths
+// Dotted half note - using half note image (will represent dotted half in ternary context)
+const xdH = xH; // dotted half note (2 beats in ternary)
+
+// Setup our collection of ternary rhythms using images
+// In ternary meters, the beat is a dotted quarter note (3 eighth notes)
+export const ternaryRhythms: Rhythm[] = [
+  // Dotted quarter: 4n. = 1 beat (3 eighth notes)
+  new Rhythm("dQ", xdQ, ["4n."], 1),
+
+  // Three eighths: 8n + 8n + 8n = 1 beat
+  new Rhythm("EEE", xEEE, ["8n", "8n", "8n"], 1),
+
+  // Quarter + eighth: 4n(2/3) + 8n(1/3) = 1 beat (approximated as 4n + 8n, but beats = 1.5, so we'll use 1.5)
+  new Rhythm("QE", xQE, ["4n", "8n"], 1.5),
+
+  // Eighth + quarter: 8n(1/3) + 4n(2/3) = 1 beat (approximated, beats = 1.5)
+  new Rhythm("EQ", xEQ, ["8n", "4n"], 1.5),
+
+  // Two sixteenths + two eighths: 16n + 16n + 8n + 8n = 1 beat
+  new Rhythm("SSEE", xSSEE, ["16n", "16n", "8n", "8n"], 1),
+
+  // Eighth + two sixteenths + eighth: 8n + 16n + 16n + 8n = 1 beat
+  new Rhythm("ESSE", xE + xS + xS + xE, ["8n", "16n", "16n", "8n"], 1),
+
+  // Two eighths + two sixteenths: 8n + 8n + 16n + 16n = 1 beat
+  new Rhythm("EESS", xEESS, ["8n", "8n", "16n", "16n"], 1),
+
+  // Four sixteenths + eighth: 16n + 16n + 16n + 16n + 8n = 1 beat
+  new Rhythm("SSSSE", xSSSSE, ["16n", "16n", "16n", "16n", "8n"], 1),
+
+  // Two sixteenths + eighth + two sixteenths: 16n + 16n + 8n + 16n + 16n = 1 beat
+  new Rhythm("SSESS", xSSESS, ["16n", "16n", "8n", "16n", "16n"], 1),
+
+  // Eighth + four sixteenths: 8n + 16n + 16n + 16n + 16n = 1 beat
+  new Rhythm("ESSSS", xESSSS, ["8n", "16n", "16n", "16n", "16n"], 1),
+
+  // Six sixteenths: 16n + 16n + 16n + 16n + 16n + 16n = 1 beat
+  new Rhythm("SSSSSS", xSSSSSS, ["16n", "16n", "16n", "16n", "16n", "16n"], 1),
+
+  // Dotted half note: 2n. = 2 beats
+  new Rhythm("dH", xdH, ["2n."], 2),
+];
+
+// Ternary time signatures
+export const ternaryTimeSignatures: TimeSignature[] = [
+  { numerator: 3, denominator: 8 },
+  { numerator: 6, denominator: 8 },
+  { numerator: 9, denominator: 8 },
+  { numerator: 12, denominator: 8 },
+  { numerator: 4, denominator: 8 },
+];
+
+// Export rhythms for backward compatibility (defaults to binary)
+export const rhythms = binaryRhythms;
 
 // Musical notes
 export const myNotes = [

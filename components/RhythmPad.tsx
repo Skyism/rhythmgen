@@ -1,13 +1,17 @@
 'use client';
 
 import React from 'react';
-import { rhythms } from '@/lib/data';
+import { getRhythmsByMeter } from '@/lib/utils';
+import { MeterType } from '@/lib/types';
 
 interface RhythmPadProps {
+  meterType: MeterType;
   onAddAnswer: (rhythmName: string) => void;
 }
 
-export default function RhythmPad({ onAddAnswer }: RhythmPadProps) {
+export default function RhythmPad({ meterType, onAddAnswer }: RhythmPadProps) {
+  const rhythms = getRhythmsByMeter(meterType);
+
   return (
     <div className="mb-4">
       <b>Rhythms:</b> (click to add to your answer)
