@@ -112,6 +112,16 @@ const xSSSSSS = xS + xS + xS + xS + xS + xS; // 6 sixteenths
 // Dotted half note - using half note image (will represent dotted half in ternary context)
 const xdH = xH; // dotted half note (2 beats in ternary)
 
+// Additional ternary rhythms with dotted eighths and mixed note values
+const xQSS = xQ + xS + xS; // quarter + 2 sixteenths
+const xSSQ = xS + xS + xQ; // 2 sixteenths + quarter
+const xdESSS = xdE + xS + xS + xS; // dotted eighth + 3 sixteenths
+const xSdESS = xS + xdE + xS + xS; // sixteenth + dotted eighth + 2 sixteenths
+const xSSdES = xS + xS + xdE + xS; // 2 sixteenths + dotted eighth + 1 sixteenth
+const xSSSdE = xS + xS + xS + xdE; // 3 sixteenths + dotted eighth
+const xdEES = xdE + xE + xS; // dotted eighth + eighth + sixteenth
+const xSEdE = xS + xE + xdE; // sixteenth + eighth + dotted eighth
+
 // Setup our collection of ternary rhythms using images
 // In ternary meters, the beat is a dotted quarter note (3 eighth notes)
 export const ternaryRhythms: Rhythm[] = [
@@ -147,6 +157,30 @@ export const ternaryRhythms: Rhythm[] = [
 
   // Six sixteenths: 16n + 16n + 16n + 16n + 16n + 16n = 1 beat
   new Rhythm("SSSSSS", xSSSSSS, ["16n", "16n", "16n", "16n", "16n", "16n"], 1),
+
+  // Quarter + two sixteenths: 4n + 16n + 16n = 1 beat
+  new Rhythm("QSS", xQSS, ["4n", "16n", "16n"], 1),
+
+  // Two sixteenths + quarter: 16n + 16n + 4n = 1 beat
+  new Rhythm("SSQ", xSSQ, ["16n", "16n", "4n"], 1),
+
+  // Dotted eighth + three sixteenths: 8n. + 16n + 16n + 16n = 1 beat
+  new Rhythm("dESSS", xdESSS, ["8n.", "16n", "16n", "16n"], 1),
+
+  // Sixteenth + dotted eighth + two sixteenths: 16n + 8n. + 16n + 16n = 1 beat
+  new Rhythm("SdESS", xSdESS, ["16n", "8n.", "16n", "16n"], 1),
+
+  // Two sixteenths + dotted eighth + sixteenth: 16n + 16n + 8n. + 16n = 1 beat
+  new Rhythm("SSdES", xSSdES, ["16n", "16n", "8n.", "16n"], 1),
+
+  // Three sixteenths + dotted eighth: 16n + 16n + 16n + 8n. = 1 beat
+  new Rhythm("SSSdE", xSSSdE, ["16n", "16n", "16n", "8n."], 1),
+
+  // Dotted eighth + eighth + sixteenth: 8n. + 8n + 16n = 1 beat
+  new Rhythm("dEES", xdEES, ["8n.", "8n", "16n"], 1),
+
+  // Sixteenth + eighth + dotted eighth: 16n + 8n + 8n. = 1 beat
+  new Rhythm("SEdE", xSEdE, ["16n", "8n", "8n."], 1),
 
   // Dotted half note: 2n. = 2 beats
   new Rhythm("dH", xdH, ["2n."], 2),
